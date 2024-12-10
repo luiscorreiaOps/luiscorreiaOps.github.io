@@ -34,7 +34,7 @@ jobs:
             }')
 
           MOTIVATIONAL_TEXT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
-          if '[ -z "$MOTIVATIONAL_TEXT" ]; then
+          if [ -z "$MOTIVATIONAL_TEXT" ]; then
             MOTIVATIONAL_TEXT="Well, it's not perfect, but it's definitely something!"
           fi
 
