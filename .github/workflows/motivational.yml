@@ -33,6 +33,8 @@ jobs:
               "messages": [{"role": "user", "content": "Generate encouraging writing text about technology or programming, no longer than 35 lines and family friendly, write like a report."}]
             }')
 
+          echo "Resposta: $RESPONSE"
+
           MOTIVATIONAL_TEXT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
           if [ -z "$MOTIVATIONAL_TEXT" ]; then
             MOTIVATIONAL_TEXT="Well, it's not perfect, but it's definitely something!"
