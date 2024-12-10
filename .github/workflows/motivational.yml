@@ -42,6 +42,7 @@ jobs:
 
           ESCAPED_TEXT=$(printf "%s" "$MOTIVATIONAL_TEXT" | sed ':a;N;$!ba;s/\n/<br>/g' | sed -E 's/[&/]/\\&/g; s/"/\\"/g')
 
+          # check div
           if grep -q '<div id="motivational-text">' index.html; then
             sed -i "s|<div id=\"motivational-text\">.*</div>|<div id=\"motivational-text\">$ESCAPED_TEXT</div>|" index.html
           else
