@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luis Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #1a73e8, #34a853);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3rem;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        #motivational-text {
+            font-style: italic;
+            color: #ffffff;
+            font-size: 1.2rem;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            max-width: 90%;
+            min-width: 20%;
+            margin: 20px auto;
+            position: relative;
+            min-height: 150px;
+            overflow-y: auto;
+            line-height: 1.5;
+            cursor: none;
+        }
+
+        #motivational-text:not(:empty) {
+            cursor: text;
+        }
+
+        #motivational-text:empty {
+            cursor: none;
+        }
+
+        #motivational-text::before {
+            content: '|';
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #fff;
+            animation: blink 2s step-start infinite;
+            position: absolute;
+            left: 14px;
+            top: 18px;
+        }
+
+        #text-header {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #777676;
+            position: absolute;
+            top: 0;
+            left: 10px;
+            width: calc(100% - 20px);
+            text-align: left;
+            font-style: italic;
+            margin-top: 5px;
+            padding-left: 5px;
+            z-index: 1;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        footer {
+            font-size: 0.9rem;
+            color: #ccc;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            background: #fff;
+            color: #1a73e8;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            bottom: 50px;
+        }
+
+        a:hover {
+            background: #1a73e8;
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Bem-vindo! - ¡Bienvenido! - Welcome!</h1>
+    <div id="motivational-text">
+        <div id="text-header">#!/bin/bash</div> 
+    </div>
+    <a href="https://github.com/luiscorreiaOps" target="_blank">GitHub</a>
+    <footer>© Luis Correia - Todos os direitos não reservados</footer>
+</body>
+</html>
