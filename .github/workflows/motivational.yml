@@ -3,8 +3,7 @@ name: Conteudo
 on:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch:
-
+  workflow_dispatch: 
 permissions:
   contents: write
   pages: write
@@ -34,15 +33,12 @@ jobs:
             }')
 
           MOTIVATIONAL_TEXT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
-          echo "Motivational Text: $MOTIVATIONAL_TEXT"
 
           if [ -z "$MOTIVATIONAL_TEXT" ]; then
             MOTIVATIONAL_TEXT="Well, it's not perfect, but it's definitely something!"
           fi
 
-          ESCAPED_TEXT=$(echo "$MOTIVATIONAL_TEXT" | perl -MHTML::Entities -e 'print encode_entities(<STDIN>);')
-
-          echo "Escaped Text: $ESCAPED_TEXT"
+          ESCAPED_TEXT=$(echo "$MOTIVATIONAL_TEXT" | sed 's/[&/\"]/\\&/g')
 
           if grep -q '<div id="motivational-text">' index.html; then
             sed -i "s|<div id=\"motivational-text\">.*</div>|<div id=\"motivational-text\">$ESCAPED_TEXT</div>|" index.html
