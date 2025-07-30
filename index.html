@@ -33,50 +33,46 @@
         }
 
         #motivational-text {
-            max-width: 50%;
-            min-height: 150px;
-            max-height: 300px;
+            max-width: 80%; 
+            min-height: 100px;
+            max-height: 400px;
             overflow-y: auto;
             color: #E0E0E0;
             white-space: pre-wrap;
             word-wrap: break-word;
             font-style: italic;
-            font-size: 1.2rem;
-            padding: 20px;
+            font-size: 1.1rem;
+            padding: 15px;
             border-radius: 15px;
             background-color: rgba(0, 0, 0, 0.5);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
             text-align: left;
-            margin: 20px auto;
+            margin: 15px auto;
             position: relative;
             cursor: text;
         }
 
         .motivational-paragraph {
-            margin-top: -15px; 
+            margin-top: 15px;
             padding: 0;
         }
 
         .motivational-paragraph::after {
-            content: '|';
-            font-weight: normal;
-            font-style: normal;
-            margin-left: 2px;
+            content: '|';Media query para telas menores (até 768px) 
             color: #fff;
             animation: blink 1.2s step-start infinite;
         }
 
         #text-header {
             font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #777676;
             position: absolute;
-            top: 0;
+            top: 5px;
             left: 10px;
             width: calc(100% - 20px);
             text-align: left;
             font-style: italic;
-            margin-top: 5px;
             padding-left: 5px;
             z-index: 1;
         }
@@ -93,7 +89,7 @@
         }
 
         footer {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #ccc;
             position: absolute;
             bottom: 10px;
@@ -103,15 +99,15 @@
             text-decoration: none;
             background: #fff;
             color: #1a73e8;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.3rem;
             border-radius: 30px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             transition: background 0.3s, color 0.3s;
-            margin-top: 20px;
+            margin-top: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            bottom: 50px;
+            position: relative; 
+            margin-bottom: 30px; 
         }
 
         a:hover {
@@ -119,11 +115,31 @@
             color: #fff;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
+
+        /* celular-solution*/
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                top: 15px;
+            }
+            #motivational-text {
+                margin-top: 100px; 
+                font-size: 1rem;
+                max-width: 90%;
+            }
+            .motivational-paragraph {
+                margin-top: 10px;
+            }
+            #text-header {
+                font-size: 0.6rem;
+                top: 3px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Bem-vindo! - ¡Bienvenido! - Welcome!</h1>
-    
+
     <div id="motivational-text">
         <div id="text-header">__SH__</div>
         <p class="motivational-paragraph">__HOLDER__</p>
