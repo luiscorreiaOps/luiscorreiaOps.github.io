@@ -30,7 +30,7 @@ jobs:
             -H "Authorization: Bearer $API_KEY" \
             -d '{
               "model": "llama3-8b-8192",
-              "messages": [{"role": "user", "content": "Generate a single paragraph of encouraging text about technology or programming. Do not include any title, preamble, or introductory sentence. Provide only the paragraph itself no more than 5 lines."}]
+              "messages": [{"role": "user", "content": "Generate a single paragraph of encouraging text about technology or programming. Do not include any title, preamble, or introductory sentence. Provide only the paragraph itself."}]
             }')
           
           TEXT_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
@@ -42,9 +42,17 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Atualizar Pagina HTML
+        env:
+          PAGE_TITLE: ${{ secrets.PAGE_TITLE }}
+          PAGE_FOOTER: ${{ secrets.PAGE_FOOTER }}
+          LUISCORREIAOPSGITHUB: ${{ secrets.LUISCORREIAOPSGITHUB }}
         run: |
           chmod +x .github/scripts/update_html.sh
-          bash .github/scripts/update_html.sh "${{ steps.get_text.outputs.text_content }}"
+          bash .github/scripts/update_html.sh \
+            "${{ steps.get_text.outputs.text_content }}" \
+            "$PAGE_TITLE" \
+            "$PAGE_FOOTER" \
+            "$LUISCORREIAOPSGITHUB"
 
       - name: Commit & Push
         run: |
@@ -52,9 +60,9 @@ jobs:
           git config --global user.email "actions@github.com"
           git add index.html
           if git diff --staged --quiet; then
-            echo "No changes to commit."
+            echo "No changes."
           else
-            git commit -m "Keep Developing: Update motivational text"
+            git commit -m "Keep Developing: Update page content"
             git push origin main
           fi
       

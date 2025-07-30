@@ -1,13 +1,22 @@
 #!/bin/bash
 
-NEW_TEXT="$1"
+MOTIVATIONAL_TEXT="$1"
+TITLE_TEXT="$2"
+FOOTER_TEXT="$3"
+LUISCORREIAOPSGITHUB="$4"
+
 INDEX_FILE="index.html"
-PLACEHOLDER="MOTIVATIONAL_TEXT_PLACEHOLDER"
+MOTIVATIONAL_PLACEHOLDER="HOLDER"
+TITLE_PLACEHOLDER="__TITULO__"
+FOOTER_PLACEHOLDER="__CONTRAPE__"
+GIT_PLACEHOLDER="__LUISCORREIAOPSGITHUB__"
 
-echo "$NEW_TEXT" > new_text.tmp
+echo "$MOTIVATIONAL_TEXT" > motivational_text.tmp
+sed -i -e "/$MOTIVATIONAL_PLACEHOLDER/r motivational_text.tmp" -e "/$MOTIVATIONAL_PLACEHOLDER/d" "$INDEX_FILE"
+rm motivational_text.tmp
 
-sed -i -e "/$PLACEHOLDER/r new_text.tmp" -e "/$PLACEHOLDER/d" "$INDEX_FILE"
+sed -i "s|$TITLE_PLACEHOLDER|$TITLE_TEXT|g" "$INDEX_FILE"
+sed -i "s|$FOOTER_PLACEHOLDER|$FOOTER_TEXT|g" "$INDEX_FILE"
+sed -i "s|$GIT_PLACEHOLDER|$LUISCORREIAOPSGITHUB|g" "$INDEX_FILE"
 
-rm new_text.tmp
-
-echo "index.html atualizado usando o método de placeholder."
+echo "index.html atualizado."
