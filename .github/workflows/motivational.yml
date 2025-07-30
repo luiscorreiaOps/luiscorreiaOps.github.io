@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -41,7 +41,7 @@ jobs:
           echo "$TEXT_CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Atualizar Pagina HTML
+      - name: Construir HTML
         env:
           PAGE_TITLE: ${{ secrets.PAGE_TITLE }}
           PAGE_FOOTER: ${{ secrets.PAGE_FOOTER }}
@@ -53,18 +53,6 @@ jobs:
             "$PAGE_TITLE" \
             "$PAGE_FOOTER" \
             "$LUISCORREIAOPSGITHUB"
-
-      - name: Commit & Push
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add index.html
-          if git diff --staged --quiet; then
-            echo "No changes."
-          else
-            git commit -m "Keep Developing: Update page content"
-            git push origin main
-          fi
       
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -72,7 +60,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: './_site'
 
   deploy:
     needs: build
@@ -83,6 +71,6 @@ jobs:
       
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
