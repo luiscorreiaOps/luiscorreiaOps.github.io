@@ -1,6 +1,6 @@
 ##  Sobre
 
-_"A automação não é o futuro, é o presente. Se você não está automatizando, está perdendo tempo."_ — **Desconhecido**
+_"A automação não é o futuro, é o presente. Se você não está automatizando, está perdendo tempo."_
 
 Espaco Github Pages. https://luiscorreiaOps.github.io
 
