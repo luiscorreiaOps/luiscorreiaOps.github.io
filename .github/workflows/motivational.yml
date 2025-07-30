@@ -23,15 +23,20 @@ jobs:
 
       - name: Gerar Texto da API
         id: get_text
+        env:
+          API_PROMPT: ${{ secrets.API_PROMPT }}
         run: |
           API_KEY=${{ secrets.IA_API_KEY }}
+          
+          JSON_PAYLOAD=$(jq -n \
+            --arg model "llama3-8b-8192" \
+            --arg prompt "$API_PROMPT" \
+            '{model: $model, messages: [{role: "user", content: $prompt}]}')
+            
           RESPONSE=$(curl --fail-with-body -s -X POST https://api.groq.com/openai/v1/chat/completions \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $API_KEY" \
-            -d '{
-              "model": "llama3-8b-8192",
-              "messages": [{"role": "user", "content": "Generate a single paragraph of encouraging text about technology or programming. Do not include any title, preamble, or introductory sentence. Provide only the paragraph itself."}]
-            }')
+            -d "$JSON_PAYLOAD")
           
           TEXT_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
           if [ -z "$TEXT_CONTENT" ]; then
