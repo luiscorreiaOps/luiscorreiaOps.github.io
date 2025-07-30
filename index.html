@@ -52,16 +52,21 @@
             cursor: text;
         }
 
-        #motivational-text::before {
-            content: '|';
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #fff;
-            animation: blink 2s step-start infinite;
-            position: absolute;
-            left: 14px;
-            top: 18px;
+
+        .motivational-paragraph {
+            margin-top: 15px;
+            padding: 0;
         }
+
+        .motivational-paragraph::after {
+            content: '|';
+            font-weight: normal;
+            font-style: normal;
+            margin-left: 2px;
+            color: #fff;
+            animation: blink 1.2s step-start infinite;
+        }
+
 
         #text-header {
             font-family: 'Courier New', monospace;
@@ -123,7 +128,7 @@
     
     <div id="motivational-text">
         <div id="text-header">#!/bin/bash</div>
-        HOLDER
+        <p class="motivational-paragraph">HOLDER</p>
     </div>
 
     <a href="__LUISCORREIAOPSGITHUB__" target="_blank">GitHub</a>
