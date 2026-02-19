@@ -25,19 +25,20 @@ jobs:
         id: get_text
         env:
           API_PROMPT: ${{ secrets.API_PROMPT }}
+          MODEL_IA: ${{ secrets.MODEL_IA }}
         run: |
           API_KEY=${{ secrets.IA_API_KEY }}
-          
+
           JSON_PAYLOAD=$(jq -n \
-            --arg model "llama3-8b-8192" \
+            --arg model "$MODEL_IA" \
             --arg prompt "$API_PROMPT" \
             '{model: $model, messages: [{role: "user", content: $prompt}]}')
-            
+
           RESPONSE=$(curl --fail-with-body -s -X POST https://api.groq.com/openai/v1/chat/completions \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $API_KEY" \
             -d "$JSON_PAYLOAD")
-          
+
           TEXT_CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
           if [ -z "$TEXT_CONTENT" ]; then
             TEXT_CONTENT="Could not retrieve text, but the workflow is running!"
@@ -58,10 +59,10 @@ jobs:
             "$PAGE_TITLE" \
             "$PAGE_FOOTER" \
             "$LUISCORREIAOPSGITHUB"
-      
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -69,11 +70,11 @@ jobs:
 
   deploy:
     needs: build
-    
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      
+
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Pages
